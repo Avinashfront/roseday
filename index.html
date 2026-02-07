@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rose Day for Kajal 🌹</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ffe4e6, #fecdd3, #fda4af);
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(8px);
+      padding: 40px 28px;
+      border-radius: 28px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      position: relative;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    h1 {
+      margin: 10px 0 6px;
+      color: #e11d48;
+      font-size: 28px;
+    }
+
+    .sub {
+      color: #555;
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+
+    .rose {
+      font-size: 64px;
+      animation: spin 6s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    button {
+      border: none;
+      padding: 14px 22px;
+      border-radius: 16px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.25s ease;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    }
+
+    .primary {
+      background: #f43f5e;
+      color: white;
+    }
+
+    .primary:hover { transform: translateY(-2px); }
+
+    .secondary {
+      background: #ec4899;
+      color: white;
+      margin-top: 14px;
+    }
+
+    .message {
+      font-size: 18px;
+      font-weight: 600;
+      color: #be123c;
+      min-height: 54px;
+      margin: 18px 0;
+      animation: slideUp 0.5s ease;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hearts {
+      font-size: 22px;
+      letter-spacing: 6px;
+      animation: float 2s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
+
+    .footer {
+      margin-top: 26px;
+      font-size: 13px;
+      color: #666;
+    }
+
+    .hidden { display: none; }
+
+    /* falling hearts */
+    .falling {
+      position: fixed;
+      top: -10px;
+      font-size: 18px;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <div class="rose">🌹</div>
+
+    <h1>Rose Day Special for Kajal</h1>
+    <div class="sub">For My Beautiful Wife Kajal</div>
+
+    <button class="primary" id="openBtn">Open Your Rose</button>
+
+    <div id="content" class="hidden">
+      <div id="msg" class="message"></div>
+      <div class="hearts">❤️ ❤️ ❤️ ❤️ ❤️</div>
+      <button class="secondary" id="nextBtn">Next Message</button>
+    </div>
+
+    <div class="footer">Made with love ❤️ — From Avinash</div>
+  </div>
+
+<script>
+  const messages = [
+    "Happy Rose Day, Kajal 🌹",
+    "Kajal, you make my life bloom with happiness",
+    "Every day with you feels like Valentine’s Day",
+    "You are my forever rose ❤️"
+  ];
+
+  let index = 0;
+
+  const openBtn = document.getElementById('openBtn');
+  const content = document.getElementById('content');
+  const msg = document.getElementById('msg');
+  const nextBtn = document.getElementById('nextBtn');
+
+  openBtn.onclick = () => {
+    openBtn.style.display = 'none';
+    content.classList.remove('hidden');
+    showMessage();
+    startHearts();
+  };
+
+  nextBtn.onclick = () => {
+    index = (index + 1) % messages.length;
+    showMessage();
+  };
+
+  function showMessage() {
+    msg.textContent = messages[index];
+  }
+
+  function startHearts() {
+    setInterval(() => {
+      const h = document.createElement('div');
+      h.className = 'falling';
+      h.textContent = '❤️';
+      h.style.left = Math.random() * 100 + 'vw';
+      h.style.animationDuration = (3 + Math.random() * 3) + 's';
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 6000);
+    }, 400);
+  }
+</script>
+</body>
+</html>
